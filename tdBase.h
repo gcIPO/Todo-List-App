@@ -152,8 +152,27 @@ task *deleteNPositionTask(task *head,int position){
     free(deletedTask);
 }
 
+//Edit a task
+void *editTaskData(task *head){
+    task *traversPointer = head;
+    task *selectedTask = searchTaskByNumber(traversPointer);
+    printf("\n\n\n To edit tasks title, enter 1 \n To edit tasks description, enter 2\n To edit tasks deadline, enter 3");
+    int editMode; scanf("%d",&editMode);
+    switch(editMode){
+        case 1:
+            gets(selectedTask->title);
+            break;
+        case 2:
+            gets(selectedTask->description);
+            break;
+        case 3:
+            gets(selectedTask->deadLine);
+            break;
+        default:
+            printf("Invalid option, try again...");
 
-void *editTaskData(){
+
+    }
 
 
 
