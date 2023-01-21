@@ -16,7 +16,7 @@ void addNewTask(){}
 void removeTask(){}
 
 
-void searchTask(){}
+void searchTasks(){}
 
 
 void editTask(){}

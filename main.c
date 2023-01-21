@@ -8,8 +8,10 @@
 
 int main() {
     head = addTaskToList(head ,newTask());
-    head = addTaskToList(head , newTask());
-    head = addTaskToList(head , newTask());
+    head = addTaskToList(head ,newTask());
+    head = addTaskToList(head ,newTask());
     fixTasksNum(head);
-    displayTaskList(head);
+    displayTaskTitles(head);
+    searchTask(head);
+
 }

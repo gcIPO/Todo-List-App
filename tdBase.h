@@ -9,7 +9,7 @@
 
 #endif //TDY_TDBASE_H
 typedef struct taskData task;
-//Linked-List Node
+//Linked-List Node Structure
 struct taskData{
     char title[51];
     char description[101];
@@ -20,7 +20,7 @@ struct taskData{
 
 
 task *head = NULL;
-
+//Function to fix task numbers
 void fixTasksNum(task *head){
     int i =1;
     task *tempHead = head;
@@ -30,7 +30,7 @@ void fixTasksNum(task *head){
         tempHead = tempHead->next;
     }
 }
-
+//Create a new node for linked list
 task *newTask (){
  task *newTaskNode = (task *)malloc(sizeof(task));
  printf("Enter a title for task (max 50 characters) : \n");
@@ -45,7 +45,7 @@ task *newTask (){
  return newTaskNode;
 
 }
-
+//Append the new node to end of tasks list
 task *addTaskToList(task *head, task *newTaskNode){
     task *tempHead = head;
     if(tempHead == NULL)
@@ -56,11 +56,11 @@ task *addTaskToList(task *head, task *newTaskNode){
      tempHead->next = newTaskNode;
     return head;
 }
-
+//print all tasks list
 void displayTaskList(task *head){
     task *tempHead = head;
     if(tempHead == NULL)
-        printf("There are no added task yet. Please add some and try again.  \n\n\n");
+        printf("There are no added tasks yet. Please add some and try again.  \n\n\n");
     else{
         printf("All Tasks List : \n\n");
         while(tempHead != NULL){
@@ -69,4 +69,36 @@ void displayTaskList(task *head){
         }
     }
 
+}
+
+void displayTaskTitles(task *head){
+    task *tempHead = head;
+    if(tempHead == NULL)
+        printf("There are no added tasks yet. Please add some and try again.  \n\n\n");
+    else{
+        printf("All Tasks Titles : \n\n");
+        while(tempHead != NULL){
+            printf("%d) %s   \n",tempHead->taskNumber,tempHead->title);
+            tempHead = tempHead->next;
+        }
+    }
+
+}
+task *searchTask(task *head){
+
+    int givenTaskNumber;
+    scanf("%d",&givenTaskNumber);
+    task *tempHead = head;
+    if(tempHead == NULL)
+        printf("No tasks added.");
+    else
+        while(tempHead != NULL) {
+            if (tempHead->taskNumber == givenTaskNumber) {
+                printf("%d) %s  |  info : %s  | Dead Line : %s  . \n",tempHead->taskNumber,tempHead->title , tempHead->description, tempHead->deadLine  );
+                return tempHead;
+            }
+            tempHead = tempHead->next;
+        }
+        printf("Given number wasn't in the list.");
+        return NULL;
 }
