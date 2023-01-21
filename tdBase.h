@@ -46,7 +46,7 @@ task *newTask (){
 
 }
 //Append the new node to end of tasks list
-task *addTaskToList(task *head, task *newTaskNode){
+task *addTaskToEndOfList(task *head, task *newTaskNode){
     task *tempHead = head;
     if(tempHead == NULL)
         return newTaskNode;
@@ -56,7 +56,27 @@ task *addTaskToList(task *head, task *newTaskNode){
      tempHead->next = newTaskNode;
     return head;
 }
-//print all tasks list
+
+//Add a task to first of the list
+task *insertTaskToFirst(task *head ,task *newTaskNode){
+    newTaskNode->next = head;
+    head = newTaskNode;
+}
+
+//Add a task to n position of list
+task *insertToNPosition(int n, task *newTaskNode, task *head){
+    int currentPosition = 1;
+    task *tempHead = head;
+    while(currentPosition + 1 < n){
+        currentPosition++;
+        tempHead = tempHead->next;
+    }
+    newTaskNode->next = tempHead->next;
+    tempHead->next = newTaskNode;
+}
+
+
+/*//print all tasks list
 void displayTaskList(task *head){
     task *tempHead = head;
     if(tempHead == NULL)
@@ -69,7 +89,7 @@ void displayTaskList(task *head){
         }
     }
 
-}
+}*/
 
 void displayTaskTitles(task *head){
     task *tempHead = head;
@@ -84,8 +104,8 @@ void displayTaskTitles(task *head){
     }
 
 }
-task *searchTask(task *head){
-
+task *searchTaskByNumber(task *head){
+//    printf("Enter a number to show its data : ");
     int givenTaskNumber;
     scanf("%d",&givenTaskNumber);
     task *tempHead = head;
@@ -94,11 +114,47 @@ task *searchTask(task *head){
     else
         while(tempHead != NULL) {
             if (tempHead->taskNumber == givenTaskNumber) {
-                printf("%d) %s  |  info : %s  | Dead Line : %s  . \n",tempHead->taskNumber,tempHead->title , tempHead->description, tempHead->deadLine  );
+                printf("\n\n\%d) %s  |  info : %s  | Dead Line : %s  . \n",tempHead->taskNumber,tempHead->title , tempHead->description, tempHead->deadLine  );
                 return tempHead;
             }
             tempHead = tempHead->next;
         }
-        printf("Given number wasn't in the list.");
         return NULL;
+}
+//Delete first node of the linked list
+task *deleteFirstTask(task *head){
+    task *prev_head = head;
+    head = head->next;
+    free(prev_head);
+}
+
+//Delete last node of the linked list
+task *deleteLastTask(task *head){
+    task *traversPointer = head;
+    while(traversPointer->next->next != NULL)
+        traversPointer = traversPointer->next;
+    free(traversPointer->next->next);
+    traversPointer->next = NULL;
+}
+
+//Delete n position task from the linked list
+
+task *deleteNPositionTask(task *head,int position){
+    task *traversPointer = head;
+    int currentPos = 1;
+
+    while(currentPos + 1 < position){
+        position++;
+        traversPointer = traversPointer->next;
+    }
+    task *deletedTask = traversPointer->next;
+    traversPointer->next = traversPointer->next->next;
+    free(deletedTask);
+}
+
+
+void *editTaskData(){
+
+
+
 }

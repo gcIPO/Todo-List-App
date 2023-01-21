@@ -7,11 +7,11 @@
 
 
 int main() {
-    head = addTaskToList(head ,newTask());
-    head = addTaskToList(head ,newTask());
-    head = addTaskToList(head ,newTask());
+    head = addTaskToEndOfList(head ,newTask());
+ //   head = addTaskToList(head ,newTask());
+ //   head = addTaskToList(head ,newTask());
     fixTasksNum(head);
     displayTaskTitles(head);
-    searchTask(head);
+    searchTaskByNumber(head);
 
 }
