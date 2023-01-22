@@ -19,6 +19,7 @@ int main() {
     fixTasksNum(head);
     prioritizeTasks();
     displayTaskTitles(head);
+    editTask();
 
 
 

@@ -32,7 +32,7 @@ task *searchTasks(int taskNum){
 }
 
 
-void *editTask(){
+void editTask(){
     displayTaskTitles(head);
     printf("Which one needs to be edited? : ");
     int selectedTaskNumber; scanf("%d", &selectedTaskNumber);
@@ -82,4 +82,5 @@ void prioritizeTasks(){
     }
     fixTasksNum(head);
 }
+
 

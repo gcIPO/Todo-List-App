@@ -35,11 +35,23 @@ int fixTasksNum(task *head){
 task *newTask (){
  task *newTaskNode = (task *)malloc(sizeof(task));
  printf("Enter a title for task (max 50 characters) : \n");
- gets(newTaskNode->title);
+char title[51];
+int i;
+for(i = 0 ; (title[i]= getchar()) != '\n' ; i++){}
+title[i] = '\0';
+strcpy(newTaskNode->title , title);
  printf("Enter a description for the task (max 100 characters) : \n");
- gets(newTaskNode->description);
+    char description[101];
+    int j;
+    for(j = 0 ; (description[j]= getchar()) != '\n' ; j++){}
+    description[j] = '\0';
+    strcpy(newTaskNode->description , description);
  printf("Enter a deadline date in YYYY/MM/DD form : \n");
- gets(newTaskNode->deadLine);
+    char deadLine[11];
+    int k;
+    for(k = 0 ; (title[k]= getchar()) != '\n' ; i++){}
+    deadLine[k] = '\0';
+    strcpy(newTaskNode->deadLine , deadLine);
  newTaskNode->taskNumber = 0;
  newTaskNode->next = NULL;
 
