@@ -17,6 +17,8 @@ int main() {
     searchTasks(2);
     system("pause");
     fixTasksNum(head);
+    prioritizeTasks();
+    displayTaskTitles(head);
 
 
 

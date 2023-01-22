@@ -148,21 +148,37 @@ void deleteTask(task** head, int selectedTaskNumber){
     free(traversPointer);
 }
 //Edit a task
-void *editTaskData(task *selectedTask){
-    printf("\n\n\n To edit tasks title, enter 1 \n To edit tasks description, enter 2\n To edit tasks deadline, enter 3");
+void editTaskData(task *selectedTask){
+    char newTitle[51];
+    char newDescription[101];
+    char newDeadLine[11];
+    printf("\n\n\n To edit tasks title, enter 1 \n To edit tasks description, enter 2\n To edit tasks deadline, enter 3: \n\n");
     int editMode; scanf("%d",&editMode);
-    switch(editMode){
-        case 1:
-            gets(selectedTask->title);
-            break;
-        case 2:
-            gets(selectedTask->description);
-            break;
-        case 3:
-            gets(selectedTask->deadLine);
-            break;
-        default:
-            printf("Invalid option, try again...");
+    if(editMode == 1){
+        fgets(newTitle,50,stdin);
+        strcpy(selectedTask->title , newTitle);
     }
+    else if(editMode == 2){
+        fgets(newDescription, 100, stdin);
+        strcpy(selectedTask->description, newDescription);
+    }
+    else if(editMode == 3){
+        fgets(newDeadLine, 10,stdin);
+        strcpy(selectedTask->deadLine , newDeadLine);
+    }
+    else
+    {
+        printf("The selected number wasn't in the options list.");
+    }
+
+
+
+}
+
+task *getLastNode(task *head){
+    task *traversPointer = head;
+    while((traversPointer != NULL)&&(traversPointer->next != NULL))
+        traversPointer = traversPointer->next;
+    return traversPointer;
 }
 
