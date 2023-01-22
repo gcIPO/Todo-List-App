@@ -83,4 +83,56 @@ void prioritizeTasks(){
     fixTasksNum(head);
 }
 
+/*    printf("pick the node you want to priorities : \n");
+    struct to_do * choosed = search();
+    printf("Enter the position that you want to replace to : \n");
+    int position = getnumber();
+    if (position-1 >= getTheLastNode()->key)
+    {
+        printf("WTF , just choose a position in the range :/   between 1 and %d , it's not that hard dude :( " , getTheLastNode()->key); 
+    }//////////////////////////
+    if (position == choosed->key)
+    {
+        return;
+    }
+    struct to_do * traversing_pointer = head;
+    struct to_do * position_pointer = head;
+    int positionHolder = position;
+    if ( position > choosed->key)
+    {
+        position++;
+    }
+
+    if (choosed->key == 1)
+    {
+        head = traversing_pointer->link;
+    }
+    else
+    {
+        while (traversing_pointer->link->key != choosed->key)
+        {
+            traversing_pointer = traversing_pointer->link;
+        }
+        traversing_pointer->link = traversing_pointer->link->link;
+    }
+    if (positionHolder == 1)
+    {
+        choosed->link = head;
+        head = choosed;
+    }
+    else if (positionHolder == getTheLastNode()->key)
+    {
+        getTheLastNode()->link = choosed;
+        choosed->link = NULL;
+    }
+    else
+    {
+        while (position_pointer->link->key != position)
+        {
+            position_pointer = position_pointer->link;
+        }
+        choosed->link = position_pointer->link;
+        position_pointer->link = choosed;
+    }
+    fixingKeys();*/
 
