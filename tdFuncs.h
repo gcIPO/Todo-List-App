@@ -10,16 +10,42 @@
 #endif //TDY_TDFUNCS_H
 
 
-void addNewTask(){}
+task *addNewTask(){
+    head = addTaskToEndOfList(head, newTask());
+    return head;
+}
 
 
-void removeTask(){}
+void removeTask(){
+    displayTaskTitles(head);
+    printf("Which one should be deleted? : ");
+    int selectedTaskToDelete; scanf("%d",&selectedTaskToDelete);
+    deleteTask(&head, selectedTaskToDelete);
+    fixTasksNum(head);
+
+}
 
 
-void searchTasks(){}
+task *searchTasks(int taskNum){
+    displayTaskTitles(head);
+    return searchTaskByNumber(head, taskNum);
+}
 
 
-void editTask(){}
+void editTask(){
+    displayTaskTitles(head);
+    printf("Which one needs to be edited? : ");
+    int selectedTaskNumber; scanf("%d", &selectedTaskNumber);
+    task *selectedTask = (searchTaskByNumber(head, selectedTaskNumber));
+    editTaskData(selectedTask);
+    displayFullTaskList(head);
+}
 
-void prioritizeTask(){}
+void prioritizeTask(){
+    displayTaskTitles(head);
+    printf("Enter the task you want to change its position : ");
+    int selectedTask; scanf("%d",&selectedTask);
+
+
+}
 

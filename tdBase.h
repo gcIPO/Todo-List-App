@@ -21,14 +21,15 @@ struct taskData{
 
 task *head = NULL;
 //Function to fix task numbers
-void fixTasksNum(task *head){
+int fixTasksNum(task *head){
     int i =1;
-    task *tempHead = head;
-    while(tempHead != NULL){
-        tempHead->taskNumber = i;
+    task *traversPointer = head;
+    while(traversPointer != NULL){
+        traversPointer->taskNumber = i;
         i++;
-        tempHead = tempHead->next;
+        traversPointer = traversPointer->next;
     }
+    return i;
 }
 //Create a new node for linked list
 task *newTask (){
@@ -47,13 +48,13 @@ task *newTask (){
 }
 //Append the new node to end of tasks list
 task *addTaskToEndOfList(task *head, task *newTaskNode){
-    task *tempHead = head;
-    if(tempHead == NULL)
+    task *traversPointer = head;
+    if(traversPointer == NULL)
         return newTaskNode;
-    while(tempHead->next != NULL)
-        tempHead = tempHead->next;
+    while(traversPointer->next != NULL)
+        traversPointer = traversPointer->next;
 
-     tempHead->next = newTaskNode;
+    traversPointer->next = newTaskNode;
     return head;
 }
 
@@ -66,96 +67,88 @@ task *insertTaskToFirst(task *head ,task *newTaskNode){
 //Add a task to n position of list
 task *insertToNPosition(int n, task *newTaskNode, task *head){
     int currentPosition = 1;
-    task *tempHead = head;
+    task *temptraversPointeread = head;
     while(currentPosition + 1 < n){
         currentPosition++;
-        tempHead = tempHead->next;
+        temptraversPointeread = temptraversPointeread->next;
     }
-    newTaskNode->next = tempHead->next;
-    tempHead->next = newTaskNode;
+    newTaskNode->next = temptraversPointeread->next;
+    temptraversPointeread->next = newTaskNode;
 }
 
 
-/*//print all tasks list
-void displayTaskList(task *head){
-    task *tempHead = head;
-    if(tempHead == NULL)
+//print all tasks list
+void displayFullTaskList(task *head){
+    task *traversPointer = head;
+    if(traversPointer == NULL)
         printf("There are no added tasks yet. Please add some and try again.  \n\n\n");
     else{
         printf("All Tasks List : \n\n");
-        while(tempHead != NULL){
-            printf("%d) %s  |  info : %s  | Dead Line : %s  . \n",tempHead->taskNumber,tempHead->title , tempHead->description, tempHead->deadLine  );
-            tempHead = tempHead->next;
+        while(traversPointer != NULL){
+            printf("%d) %s  |  info : %s  | Dead Line : %s  . \n", traversPointer->taskNumber, traversPointer->title , traversPointer->description, traversPointer->deadLine  );
+            traversPointer = traversPointer->next;
         }
     }
 
-}*/
+}
 
 void displayTaskTitles(task *head){
-    task *tempHead = head;
-    if(tempHead == NULL)
+    task *traversPointer = head;
+    if(traversPointer == NULL)
         printf("There are no added tasks yet. Please add some and try again.  \n\n\n");
     else{
         printf("All Tasks Titles : \n\n");
-        while(tempHead != NULL){
-            printf("%d) %s   \n",tempHead->taskNumber,tempHead->title);
-            tempHead = tempHead->next;
+        while(traversPointer != NULL){
+            printf("%d) %s   \n", traversPointer->taskNumber, traversPointer->title);
+            traversPointer = traversPointer->next;
         }
     }
 
 }
-task *searchTaskByNumber(task *head){
-//    printf("Enter a number to show its data : ");
-    int givenTaskNumber;
-    scanf("%d",&givenTaskNumber);
-    task *tempHead = head;
-    if(tempHead == NULL)
+task *searchTaskByNumber(task *head , int desiredTaskNumber){
+
+
+    task *traversPointer = head;
+    if(traversPointer == NULL)
         printf("No tasks added.");
     else
-        while(tempHead != NULL) {
-            if (tempHead->taskNumber == givenTaskNumber) {
-                printf("\n\n\%d) %s  |  info : %s  | Dead Line : %s  . \n",tempHead->taskNumber,tempHead->title , tempHead->description, tempHead->deadLine  );
-                return tempHead;
+        while(traversPointer != NULL) {
+            if (traversPointer->taskNumber == desiredTaskNumber) {
+                printf("\n\n\%d) %s  |  info : %s  | Dead Line : %s  . \n", traversPointer->taskNumber, traversPointer->title , traversPointer->description, traversPointer->deadLine  );
+                return traversPointer;
             }
-            tempHead = tempHead->next;
+            traversPointer = traversPointer->next;
         }
         return NULL;
 }
-//Delete first node of the linked list
-task *deleteFirstTask(task *head){
-    task *prev_head = head;
-    head = head->next;
-    free(prev_head);
-}
 
-//Delete last node of the linked list
-task *deleteLastTask(task *head){
-    task *traversPointer = head;
-    while(traversPointer->next->next != NULL)
-        traversPointer = traversPointer->next;
-    free(traversPointer->next->next);
-    traversPointer->next = NULL;
-}
 
-//Delete n position task from the linked list
 
-task *deleteNPositionTask(task *head,int position){
-    task *traversPointer = head;
-    int currentPos = 1;
 
-    while(currentPos + 1 < position){
-        position++;
+//Delete Node
+void deleteTask(task** head, int selectedTaskNumber){
+    task *traversPointer = *head , *prev;
+
+    if(traversPointer != NULL && traversPointer->taskNumber == selectedTaskNumber){
+        *head = traversPointer->next;
+        free(traversPointer);
+        return;
+    }
+
+    while (traversPointer != NULL && traversPointer->taskNumber != selectedTaskNumber){
+        prev = traversPointer;
         traversPointer = traversPointer->next;
     }
-    task *deletedTask = traversPointer->next;
-    traversPointer->next = traversPointer->next->next;
-    free(deletedTask);
-}
 
+    if(traversPointer == NULL)
+        return;
+
+
+    prev->next = traversPointer->next;
+    free(traversPointer);
+}
 //Edit a task
-void *editTaskData(task *head){
-    task *traversPointer = head;
-    task *selectedTask = searchTaskByNumber(traversPointer);
+void *editTaskData(task *selectedTask){
     printf("\n\n\n To edit tasks title, enter 1 \n To edit tasks description, enter 2\n To edit tasks deadline, enter 3");
     int editMode; scanf("%d",&editMode);
     switch(editMode){
@@ -170,10 +163,6 @@ void *editTaskData(task *head){
             break;
         default:
             printf("Invalid option, try again...");
-
-
     }
-
-
-
 }
+
