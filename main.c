@@ -3,9 +3,6 @@
 #include "tdFuncs.h"
 
 
-
-
-
 int main() {
     head = addNewTask();
     system("cls");
@@ -19,9 +16,8 @@ int main() {
     system("pause");
     searchTasks(2);
     system("pause");
-    fixTasksNum(head),
-    removeTask();
-    displayFullTaskList(head);
-    system("pause");
+    fixTasksNum(head);
+
+
 
 }
